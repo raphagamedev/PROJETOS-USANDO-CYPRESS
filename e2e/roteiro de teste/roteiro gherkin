@@ -1,0 +1,88 @@
+#|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|
+#|  				ROTEIRO DE TESTE SIMPLES                     |
+#|_______________________________________________________________|
+#
+# FUNCIONALIDADE DO SITE ADOPET
+
+
+
+@CADASTRO
+
+Feature: Cadastro otimizado do novo usuário
+
+    As usuário
+    I Want me cadastrar no sistema ADOPET
+    So que seja possivel acessar o sistema
+
+    Objetivo: O cadastro de um novo usuário tem como objetivo alimentar o banco de dados e ter acesso a pagina de adoção a partir de um login valido.
+
+    Background:
+        
+        Give que o usuário acesse a pagina de cadastro
+        And o usuário possua um email válido para cadastro
+    	And o usuário cumpra os requisitos necessários para cadastrar a senha
+	    And o usuário preencha os campos obrigatórios como "Nome", "E-mail", "Senha" e "Confirmação de senha"
+        Then o cadastro terá sido realizado com sucesso
+   
+    
+    Scenario: Validar Nome
+
+        Given que o usuário acessou a página de cadastro
+        When ele preencher o campo NOME 
+        And ao clicar no próximoa campo obrigatório
+        Then o sistema deverá fazer uma verificação se o NOME é valido
+    
+    Scenario: Validar Email 
+    
+        Given que o usuário acessou a página de cadastro
+        When ele preencher o campo EMAIL com um e-mail válido
+        And clicar em qualquer campo
+        Then o sistema deverá fazer uma verificação se o EMAIL é valido 
+    
+    Scenario: Validar Senha
+    
+        Given que o usuário acessou a página de cadastro
+        When ele preencher o campo SENHA cumprindo os requisitos
+        And clicar em qualquer campo
+        Then o sistema deverá fazer uma verificação se o SENHA é valida
+    
+    
+    Scenario: Validar a Confirmação de Senha
+    
+        Given que o usuário acessou a página de cadastro
+        When ele preencher o campo CONFIRMAÇÃO DE SENHA com a mesma senha do campo SENHA
+        And clicar no botão CADASTRAR
+        Then o sistema deverá fazer uma verificação se as senhas são correspondentes
+    
+    
+    
+    Scenario: Cadastrar usuário (otimizado)
+    
+        Given que o usuário acessou o formulário de cadastro
+        When preencher os campos com dados válidos
+        And clicar no botão CADASTRAR
+        Then o usuário terá efetuado o cadastro de forma correta sendo direcionado para a tela de login (/login)
+
+
+
+
+
+
+
+@LOGIN
+
+Feature: Login de usuário
+
+    Background: 
+        
+        Given que o usuário possui uma conta no sistema ADOPET    
+
+    
+    Scenario: Login padrão
+
+        Given que o usuário acessou o site pela URL de referência (/login)
+        And preencher o campo E-mail
+        And preencher  o campo Senha
+        And clicar no botão FAZER LOGIN
+        And o sistema autenticará as credenciais fornecidas
+        Then o sistema redirecionará o usuário para a tela principal (/home)
